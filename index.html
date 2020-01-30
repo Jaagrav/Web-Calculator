@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator gen2.0</title>
+    <link rel="stylesheet" href="c.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+    <style>
+         @import url('https://fonts.googleapis.com/css?family=Questrial|Montserrat&display=swap');
+@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) { body { display:none; } }
+body{
+    overflow: hidden;
+}
+.background{
+    position: absolute;
+    height: 300%;
+    width: 100%;
+    margin: auto;
+    z-index: -10;
+    transition: 1s;
+    top: 0;right: 0;left: 0;bottom: 0;
+    background: linear-gradient(rgb(204, 252, 255), rgb(99, 120, 206), rgb(0, 4, 255),rgb(0, 5, 68), rgb(5, 0, 31), rgb(0, 0, 0));
+}
+.functionBtns{
+    position: fixed;
+    height: 100px;
+    width: 100%;
+    margin: auto;
+    bottom: 0;right: 0;left: 0;
+}
+#add{
+    position: absolute;
+    width: 40px;
+    height: 90px;
+    outline: none;
+    border: 0;color: white;
+    font-size: 20px;
+    border-radius: 50px;
+    top: 0;font-family: 'Questrial', sans-serif;
+    left: 12%;
+    background: linear-gradient(-45deg, rgb(255, 24, 24), rgb(255, 198, 42));
+}
+#equ{
+    position: absolute;
+    width: 40px;color: white;
+    height: 90px;
+    outline: none;
+    border: 0;
+    background: linear-gradient(-45deg,rgb(255, 0, 0), rgb(255, 83, 163), rgb(208, 157, 255));
+    font-size: 20px;
+    border-radius: 50px;
+    left: 78%;
+    font-family: 'Questrial', sans-serif;
+    top: 0px;
+}
+#sub, #pro, #quo, #rem, #bL, #bR{
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    outline: none;
+    border: 0;color: white;
+    transition: .5s;
+    font-size: 20px;
+    border-radius: 50px;
+    left: 29%;
+    font-family: 'Questrial', sans-serif;
+    background: linear-gradient(-45deg, rgb(255, 24, 24), rgb(255, 198, 42));
+}
+#pro{
+    left: 45%;
+    transform: rotate(45deg);
+}
+#quo{
+    top: 50px;
+    left: 45%;
+}
+#rem{
+    top: 50px;
+    font-size: 15px;
+}
+#bL{
+    left: 61%;
+}
+#bR{
+    left: 61%;
+    top: 50px;
+}
+.numberPad{
+    position: fixed;
+    height: 150px;
+    width: 100%;
+    font-size: 20px;
+    margin: auto;
+    bottom: 15%;
+    font-family: 'Questrial', sans-serif;
+    left: 0;right: 0;
+    z-index: 2;
+    text-align: center;color:white;
+}
+td{
+    height: 50px;
+    width: 60px;
+    transition: .5s;
+    border-radius: 50px;
+}
+.display{
+    position: fixed;
+    height: 140px;
+    width: 94%;
+    margin: auto;
+    font-family: 'Montserrat', sans-serif;
+    top: 7%;left: 0;right: 0;
+    font-size: 110px;
+    text-align: right;
+    transition: 1s;
+    overflow-y: hidden;
+    z-index:-1;
+}
+.history{
+    position: fixed;
+    height: 115px;
+    width: 95%;
+    text-align: right;
+    padding-right: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 50px;
+    overflow-x: hidden;
+    top: 28%;
+    line-height: 50px;
+    transition:1s;
+    z-index:-1;
+}
+td:active{
+    background: rgba(177, 177, 177, 0.281);
+}
+#clear{
+    position: fixed;
+    height: 25px;
+    width: 25px;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 50px;
+    border: 0;
+    text-align: center;
+    padding: 5px;
+    top: 10px;
+    left: 10px;
+    border: 0;color: white;
+    outline: none;
+    background:  linear-gradient(135deg, rgb(95, 37, 255), rgb(0, 27, 102));
+}
+.mode{
+    position: fixed;
+    height: 25px;
+    width: 25px;
+    background: #222;
+    top: 10px;
+    left: 40px;
+    border-radius: 50px;
+    transition: 1s;
+}
+    </style>
+</head>
+
+<body class="body">
+    <div class="background">
+    </div>
+    <div class="functionBtns">
+        <button id="add" onclick="nAdd('+')">+</button>
+        <button id="sub" onclick="nAdd('-')">-</button>
+        <button id="pro" onclick="nAdd('x')">+</button>
+        <button id="quo" onclick="nAdd('/')">/</button>
+        <button id="rem" onclick="nAdd('%')">%</button>
+        <button id="equ" onclick="equal()">=</button>
+        <button id="bL" onclick="nAdd('(')">(</button>
+        <button id="bR" onclick="nAdd(')')">)</button>
+    </div>
+    <table class="numberPad">
+        <tr>
+            <td onclick="nAdd('7')">7</td>
+            <td onclick="nAdd('8')">8</td>
+            <td onclick="nAdd('9')">9</td>
+        </tr>
+        <tr>
+            <td onclick="nAdd('4')">4</td>
+            <td onclick="nAdd('5')">5</td>
+            <td onclick="nAdd('6')">6</td>
+        </tr>
+        <tr>
+            <td onclick="nAdd('1')">1</td>
+            <td onclick="nAdd('2')">2</td>
+            <td onclick="nAdd('3')">3</td>
+        </tr>
+        <tr>
+            <td onclick="nAdd('0')">0</td>
+            <td onclick="nAdd('.')">.</td>
+            <td onclick='n=n.substring(0, n.length-1);document.querySelector(".display").innerHTML=n'>
+                <</td> </tr> </table> <div class="display">
+                    </div>
+                    <div class="history"></div>
+                    <button id="clear"
+                        onclick="n='';document.querySelector('.display').innerHTML = n;document.querySelector('.history').innerHTML = n;">C</button>
+                    <div class="mode" onclick="navigator.vibrate(100);changeMode();"></div>
+                    <script>
+                    
+                        changeMode();
+var n = "";
+function nAdd(x) {
+    navigator.vibrate(50);
+    if (x == '(' || x == ')' || x == '0' || x == '1' || x == '2' || x == '3' || x == '4' || x == '5' || x == '6' || x == '7' || x == '8' || x == '9') {
+        document.querySelector(".display").innerHTML += x;
+        n += x;
+    }
+    else if (document.querySelector(".display").innerHTML.charAt(document.querySelector(".display").innerHTML.length - 1) != x&&n.length>0) {
+        if (n.charAt(n.length - 1) == '(' || n.charAt(n.length - 1) == ')' || n.charAt(n.length - 1) == '0' || n.charAt(n.length - 1) == '1' || n.charAt(n.length - 1) == '2' || n.charAt(n.length - 1) == '3' || n.charAt(n.length - 1) == '4' || n.charAt(n.length - 1) == '5' || n.charAt(n.length - 1) == '6' || n.charAt(n.length - 1) == '7' || n.charAt(n.length - 1) == '8' || n.charAt(n.length - 1) == '9')
+            n += x;
+        else
+            n = n.substring(0, n.length - 1) + x; document.querySelector(".display").innerHTML = n.replace('*','x');;
+            n = n.replace('x','*');
+    }
+    document.querySelector(".display").scrollBy(1000, 0);
+}
+function equal() {
+    if (document.querySelector('.display').innerHTML.trim() != '') {
+    navigator.vibrate([50,50,50]);
+        var x = n.replace('x', '*');
+        document.querySelector(".history").innerHTML += document.querySelector(".display").innerHTML + " = " + ((eval(x) == 'Infinity') ? '∞' : eval(x)) + "<br>";
+        document.querySelector(".history").scrollBy(0, 1000);
+        document.querySelector(".display").innerHTML = (eval(x) == 'Infinity') ? '∞' : eval(x);
+        n = document.querySelector(".display").innerHTML;
+    }
+}
+var dm = true;
+function changeMode() {
+    if (dm) {
+        document.querySelector('.background').style.transform = "translateY(-32%)";
+        document.querySelector('.mode').style.background = "white";
+        dm = false;
+        document.querySelector('.body').style.color = 'white';
+    }
+    else {
+        document.querySelector('.body').style.color = 'black';
+        document.querySelector('.mode').style.background = "#222";
+        document.querySelector('.background').style.transform = "translateY(32%)";
+        dm = true;
+    }
+}
+                    </script>
+</body>
+
+</html>
